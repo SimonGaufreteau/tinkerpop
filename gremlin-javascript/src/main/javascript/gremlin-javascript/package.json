@@ -17,19 +17,26 @@
     "ws": "^8.11.0"
   },
   "devDependencies": {
+    "@types/jest": "^27.5.0",
+    "@types/node": "^16.18.11",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.0.0",
     "chai": "~4.3.6",
     "chai-string": "~1.5.0",
     "colors": "1.4.0",
     "cross-env": "^7.0.3",
     "cucumber": "~6.0.7",
-    "eslint": "^8.30.0",
+    "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "grunt": "^1.5.3",
     "grunt-cli": "~1.4.3",
     "grunt-jsdoc": "~2.4.1",
+    "jest": "^26.6.1",
     "mocha": "^10.2.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "ts-jest": "^26.4.2",
+    "typescript": "^4.7.4"
   },
   "repository": {
     "type": "git",
@@ -39,7 +46,12 @@
   "bugs": {
     "url": "https://issues.apache.org/jira/browse/TINKERPOP"
   },
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "lint": "eslint -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts\"",
     "test": "npm run unit-test && npm run integration-test",
     "unit-test": "mocha test/unit/*",
     "integration-test": "npm run integration-test-graphson30 && npm run integration-test-graphbinary",
@@ -51,9 +63,11 @@
     "features-graphbinary": "cross-env CLIENT_MIMETYPE='application/vnd.graphbinary-v1.0' cucumber-js --require test/cucumber ../../../../../gremlin-test/src/main/resources/org/apache/tinkerpop/gremlin/test/features/",
     "features-docker": "npm run features-graphson30-docker && npm run features-graphbinary-docker",
     "features-graphson30-docker": "cross-env CLIENT_MIMETYPE='application/vnd.gremlin-v3.0+json' cucumber-js --require test/cucumber ../gremlin-test/",
-    "features-graphbinary-docker": "cross-env CLIENT_MIMETYPE='application/vnd.graphbinary-v1.0' cucumber-js --require test/cucumber ../gremlin-test/",
-    "lint": "eslint --ext .js ."
+    "features-graphbinary-docker": "cross-env CLIENT_MIMETYPE='application/vnd.graphbinary-v1.0' cucumber-js --require test/cucumber ../gremlin-test/"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "engines": {
     "node": ">=10"
   }

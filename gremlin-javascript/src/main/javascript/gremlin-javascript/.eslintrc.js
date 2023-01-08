@@ -17,8 +17,6 @@
  *  under the License.
  */
 
-'use strict';
-
 module.exports = {
   env: {
     commonjs: true,
@@ -27,9 +25,11 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2017,
+    sourceType: 'module',
   },
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  parser: '@typescript-eslint/parser',
   ignorePatterns: ['test/**/*.js', 'doc/**/*.js'],
-  extends: ['eslint:recommended', 'prettier'],
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
